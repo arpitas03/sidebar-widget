@@ -3,6 +3,7 @@
     border-radius: 2px;
     margin: 0 auto;
     border: 1px solid #363d44;
+    margin-top: 5px;
   }
   .accordion-items {
     list-style: none;
@@ -25,12 +26,11 @@
   }
   .accordion-content {
     background-color: #161d27;
-    padding: 1em;
     border-top: 1px solid #363d44;
   }
 
   .title{
-    color:   #a3a9b0;
+    color: #a3a9b0;
     font-size: 14px;
     font-weight: 600;
     text-align: center;

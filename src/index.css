@@ -13,3 +13,7 @@ body {
 code {
   font-family: 'Roboto', sans-serif;
 }
+
+.row>*{
+  padding-right: 0px;
+}
