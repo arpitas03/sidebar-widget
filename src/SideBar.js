@@ -1,72 +1,99 @@
-import React from "react";
-import cloudIcon from "./assets/images/partlyCloudy.png";
+import React, { useEffect, useState } from "react";
+import cloudIcon from "./assets/images/cloud.jpeg";
 import sunIcon from "./assets/images/sun.png";
 import Accordion from "./components/Accordian/Accordian";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDownLong } from "@fortawesome/free-solid-svg-icons";
+import RampChart from "./components/RampChart/RampChart";
+import getRampAlgorithms from "./mockApi";
 
 function SidebarWidget() {
+  const [data, setData] = useState([]);
+  const [rampData, setRampData] = useState([]);
+  useEffect(() => {
+    getRampAlgorithms((ramps) => setData(ramps));
+  }, []);
+
+  useEffect(() => {
+    let chartArr = [];
+
+    const result = data.reduce((acc, item) => {
+      acc[item.algorithm] = (acc[item.algorithm] || 0) + 1;
+      return acc;
+    }, {});
+    Object.entries(result).map(([key, value]) => {
+      return chartArr.push({ name: key, value: value });
+    });
+    setRampData(chartArr);
+  }, [data]);
 
   const accordianContent = (data) => {
-    return data.map((item,i)=> {
+    return data.map((item, i) => {
       return (
         <div className="container accContainer" key={i}>
-        <div className="row">
-          <div className="col-1">
-            <span className={"dot " + (item.trafficLevel === 'High' ? 'red' : 'yellow')}></span>
+          <div className="row">
+            <div className="col-1">
+              <span
+                className={
+                  "dot " + (item.trafficLevel === "High" ? "red" : "yellow")
+                }
+              ></span>
+            </div>
+            <div className="col-8 route1">{item.routeTitle}</div>
+            <div className="col-1 route2">{item.distance}</div>
           </div>
-          <div className="col-8 route1" >{item.routeTitle}</div>
-          <div className="col-1 route2">{item.distance}</div>
+          <div className="row">
+            <div className="col-1">
+              <FontAwesomeIcon icon={faArrowDownLong} color="#515459" />
+            </div>
+            <div className="col-8 route2">
+              <div>{item.subroute1}</div>
+              <div>{item.subroute2}</div>
+            </div>
+            <div className="col-3 ac">
+              {item.time}
+              <span className="route2"> min</span>
+            </div>
+          </div>
         </div>
-        <div className="row">
-          <div className="col-1">
-            <FontAwesomeIcon icon={faArrowDownLong} color="#515459"/>
-          </div>
-          <div className="col-8 route2">
-            <div>{item.subroute1}</div>
-            <div>{item.subroute2}</div>
-          </div>
-          <div className="col-3 ac">{item.time}<span className="route2"> min</span></div>
-        </div>
-       
-      </div>
       );
-    })
- 
+    });
   };
 
-  const routeData = [{
-    routeTitle: "Monash Fwy Out",
-    distance: "13km",
-    subroute1: "Kings Way",
-    subroute2: "EastLink",
-    time: "45",
-    trafficLevel: "High"
-  },
-  {
-    routeTitle: "Monash Fwy Out",
-    distance: "15km",
-    subroute1: "Kings Way",
-    subroute2: "EastLink",
-    time: "28",
-    trafficLevel: "High"
-  },
-  {
-    routeTitle: "Western Ring Rd",
-    distance: "5km",
-    subroute1: "West Gate Fwy",
-    subroute2: "Western Fwy",
-    time: "5",
-    trafficLevel: "Moderate"
-  },
-  {
-    routeTitle: "Eastern Fwy",
-    distance: "15km",
-    subroute1: "Hoddle St",
-    subroute2: "Springvale Rd",
-    time: "25",
-    trafficLevel: "Moderate"
-  }]
+  const routeData = [
+    {
+      routeTitle: "Monash Fwy Out",
+      distance: "13km",
+      subroute1: "Kings Way",
+      subroute2: "EastLink",
+      time: "45",
+      trafficLevel: "High",
+    },
+    {
+      routeTitle: "Monash Fwy Out",
+      distance: "15km",
+      subroute1: "Kings Way",
+      subroute2: "EastLink",
+      time: "28",
+      trafficLevel: "High",
+    },
+    {
+      routeTitle: "Western Ring Rd",
+      distance: "5km",
+      subroute1: "West Gate Fwy",
+      subroute2: "Western Fwy",
+      time: "5",
+      trafficLevel: "Moderate",
+    },
+    {
+      routeTitle: "Eastern Fwy",
+      distance: "15km",
+      subroute1: "Hoddle St",
+      subroute2: "Springvale Rd",
+      time: "25",
+      trafficLevel: "Moderate",
+    },
+  ];
   const accordionData = {
     heading: "DELAYED ROUTES",
     content: accordianContent(routeData),
@@ -121,6 +148,12 @@ function SidebarWidget() {
         <Accordion
           heading={accordionData.heading}
           content={accordionData.content}
+        />
+      </div>
+      <div className="accordion ">
+        <Accordion
+          heading="RAMP CHART"
+          content={<RampChart data={rampData} dataKey="value" />}
         />
       </div>
     </div>
