@@ -1,0 +1,81 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mainDiv {
+  height: 100vh;
+  color: #fff;
+  width: 280px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  overflow-x: hidden;
+  padding-top: 20px;
+  font-family: 'Roboto', sans-serif;
+  
+}
+.city{
+  font-size: 14px;
+  font-weight: 50;
+  color: #9B9CA0;
+  
+}
+.temp{
+  font-size: 50px;
+  font-weight: 400;
+}
+.dateTime {
+  font-size: 10px;
+  font-weight: 200;
+}
+.alignCenter{
+  text-align: center;
+}
+.contentAlignment {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 8px 16px 2px 16px;
+}
+.cloudIcon {
+  position: relative;
+  margin-bottom: 8px;
+  margin-left: 4px;
+}
