@@ -6,17 +6,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDownLong } from "@fortawesome/free-solid-svg-icons";
 import RampChart from "./components/RampChart/RampChart";
 import getRampAlgorithms from "./mockApi";
+import { routeData } from "./data";
 
 function SidebarWidget() {
   const [data, setData] = useState([]);
   const [rampData, setRampData] = useState([]);
+
+  // api call
   useEffect(() => {
     getRampAlgorithms((ramps) => setData(ramps));
   }, []);
 
+  // calculating the ramps running a particular algorithm
+  // setting the ramp data as per pie chart data format
   useEffect(() => {
     let chartArr = [];
-
     const result = data.reduce((acc, item) => {
       acc[item.algorithm] = (acc[item.algorithm] || 0) + 1;
       return acc;
@@ -27,32 +31,34 @@ function SidebarWidget() {
     setRampData(chartArr);
   }, [data]);
 
-  const accordianContent = (data) => {
+  // function returning delayed route list
+  const routeWidgetContent = (data) => {
     return data.map((item, i) => {
       return (
-        <div className="container accContainer" key={i}>
+        <div className="container accContainer " key={i} id="routes">
           <div className="row">
             <div className="col-1">
               <span
                 className={
                   "dot " + (item.trafficLevel === "High" ? "red" : "yellow")
                 }
+                data-testid="circle"
               ></span>
             </div>
             <div className="col-8 route1">{item.routeTitle}</div>
-            <div className="col-1 route2">{item.distance}</div>
+            <div className="col-1 route2 dist">{item.distance}</div>
           </div>
           <div className="row">
             <div className="col-1">
-              <FontAwesomeIcon icon={faArrowDownLong} color="#515459" />
+              <FontAwesomeIcon icon={faArrowDownLong} color="#91969e" className="arrowIcon" data-testid="arrowIcon"/>
             </div>
-            <div className="col-8 route2">
+            <div className="col-7 route2">
               <div>{item.subroute1}</div>
               <div>{item.subroute2}</div>
             </div>
-            <div className="col-3 ac">
+            <div className="col-3 timeDiv">
               {item.time}
-              <span className="route2"> min</span>
+              <span className="minDiv"> min</span>
             </div>
           </div>
         </div>
@@ -60,43 +66,10 @@ function SidebarWidget() {
     });
   };
 
-  const routeData = [
-    {
-      routeTitle: "Monash Fwy Out",
-      distance: "13km",
-      subroute1: "Kings Way",
-      subroute2: "EastLink",
-      time: "45",
-      trafficLevel: "High",
-    },
-    {
-      routeTitle: "Monash Fwy Out",
-      distance: "15km",
-      subroute1: "Kings Way",
-      subroute2: "EastLink",
-      time: "28",
-      trafficLevel: "High",
-    },
-    {
-      routeTitle: "Western Ring Rd",
-      distance: "5km",
-      subroute1: "West Gate Fwy",
-      subroute2: "Western Fwy",
-      time: "5",
-      trafficLevel: "Moderate",
-    },
-    {
-      routeTitle: "Eastern Fwy",
-      distance: "15km",
-      subroute1: "Hoddle St",
-      subroute2: "Springvale Rd",
-      time: "25",
-      trafficLevel: "Moderate",
-    },
-  ];
-  const accordionData = {
+  // setting delayed route content
+  const delayedRouteContent = {
     heading: "DELAYED ROUTES",
-    content: accordianContent(routeData),
+    content: routeWidgetContent(routeData),
   };
   return (
     <div className="mainDiv">
@@ -104,8 +77,8 @@ function SidebarWidget() {
         <div className="container">
           <div className="row">
             <div className="col alignCenter">
-              <div className="city offset-md-2">Melbourne</div>
-              <div className="temp offset-md-2">32°</div>
+              <div className="city">Melbourne</div>
+              <div className="temp">32°</div>
               <div className="dateTime">Tue 16th 3:46PM</div>
             </div>
             <div className="col">
@@ -113,11 +86,12 @@ function SidebarWidget() {
                 className="cloudIcon"
                 src={cloudIcon}
                 alt={cloudIcon}
-                height={120}
-                width={120}
+                height={100}
+                width={110}
               />
             </div>
           </div>
+          <div className="weather">
           <div className="row">
             <div className="col city">
               <span>Humidity</span>
@@ -138,19 +112,20 @@ function SidebarWidget() {
             <div className="col city">Tomorrow</div>
             <div className="col">
               <span>30°</span>
-              <img src={sunIcon} alt={sunIcon} height={12} width={12}></img>
+              <img className="sunIcon" src={sunIcon} alt={sunIcon} height={20} width={20}></img>
             </div>
+          </div>
           </div>
         </div>
       </div>
 
-      <div className="accordion ">
+      <div className="accordion" data-testid="delayedRouteWidget">
         <Accordion
-          heading={accordionData.heading}
-          content={accordionData.content}
+          heading={delayedRouteContent.heading}
+          content={delayedRouteContent.content}
         />
       </div>
-      <div className="accordion ">
+      <div className="accordion" data-testid="rampChartWidget">
         <Accordion
           heading="RAMP CHART"
           content={<RampChart data={rampData} dataKey="value" />}

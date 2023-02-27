@@ -13,17 +13,6 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
 .App-link {
   color: #61dafb;
 }
@@ -47,7 +36,6 @@
   left: 0;
   background-color: #000;
   overflow-x: hidden;
-  padding-top: 20px;
   font-family: 'Roboto', sans-serif;
   
 }
@@ -58,32 +46,35 @@
   
 }
 .temp{
-  font-size: 50px;
-  font-weight: 400;
+  font-size: 42px;
+  font-weight: 500;
 }
 .dateTime {
-  font-size: 10px;
-  font-weight: 200;
+  font-size: 12px;
+  font-weight: 100;
+  color: #9B9CA0;
 }
 .alignCenter{
-  text-align: center;
+text-align: center;
+line-height: 1;
+margin-top: 25px;
 }
 .contentAlignment {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 8px 16px 2px 16px;
+  margin-left: 40px;
 }
 .cloudIcon {
   position: relative;
-  margin-bottom: 8px;
-  margin-left: 4px;
+  margin-bottom: 10px;
+  margin-right: 15px;
 }
 
 .dot{
   border-radius: 50%;
-  height:10px;
-  width: 10px;
+  height: 8px;
+  width: 8px;
   display: inline-block;
 }
 .red{
@@ -94,18 +85,38 @@
 }
 .route1 {
   color: #a3a9b0;
-  font-size: 12px;
-  font-weight: 400;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 5px;
 }
 .route2{
-  color: #a3a9b0;
-  font-size: 10px;
+  color: #575e67;
+  font-size: 11px;
   font-weight: 200;
+  line-height: 1.5;
 }
 .accContainer{
-border-bottom: 1px solid #363d44;;
+border-bottom: 1px solid #1F262E;;
 }
-.ac{
+.timeDiv{
   font-size: 18px;
-  font-weight: 800;
+  margin-left: 8px;
+  font-family: 'RobotoBold';
+}
+.weather{
+  margin-bottom: 25px;
+}
+.sunIcon {
+  position: relative;
+  bottom: 4px;
+  margin-left: 3px;
+}
+.arrowIcon{
+  margin-top: 8px;
+}
+.minDiv{
+  font-size: 10px;
+}
+.dist {
+  margin-top: 8px;
 }

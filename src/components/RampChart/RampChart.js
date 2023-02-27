@@ -1,8 +1,9 @@
 import React from "react";
 import { PieChart, Pie, Cell } from "recharts";
 
+// Ramp Chart Component
 const RampChart = (props) => {
-  const Colors = ["#71D8D1", "#25B4A9", "#71d8d1", "#92e3dd", "#f1f8ff"];
+  const Colors = ["#71D8D1", "#25B4A9", "#71d8d1", "#92e3dd", "#f1f8ff"]; // colors as per the mock chart provided
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({
     cx,
@@ -33,7 +34,7 @@ const RampChart = (props) => {
   };
 
   return (
-    <PieChart width={400} height={250}>
+    <PieChart width={400} height={220}>
       <Pie
         data={props.data}
         dataKey={props.dataKey}
