@@ -1,4 +1,4 @@
-# SideBar For Situational Awareness dashboard
+# Sidebar for situational awareness dashboard
 
 This project is a Sidebar Widget Application that lists delayed routes and ramp charts.
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
