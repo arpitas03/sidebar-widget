@@ -112,7 +112,7 @@ function SidebarWidget() {
             <div className="col city">Tomorrow</div>
             <div className="col">
               <span>30°</span>
-              <img className="sunIcon" src={sunIcon} alt={sunIcon} height={20} width={20}></img>
+              <img className="iconPosTop" src={sunIcon} alt={sunIcon} height={20} width={20}></img>
             </div>
           </div>
           </div>

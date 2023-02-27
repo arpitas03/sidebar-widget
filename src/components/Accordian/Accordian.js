@@ -11,9 +11,9 @@ const Accordion = ({ heading, content, key }) => {
         <span className="title">{heading}</span>
         <span>
           {!isActive ? (
-            <FontAwesomeIcon icon={faChevronUp} />
+            <FontAwesomeIcon icon={faChevronUp} className="iconPosTop" />
           ) : (
-            <FontAwesomeIcon icon={faChevronDown} />
+            <FontAwesomeIcon icon={faChevronDown} className="iconPosTop" />
           )}
         </span>
       </div>
